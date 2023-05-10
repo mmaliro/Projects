@@ -1,0 +1,91 @@
+@base-url = http://localhost:8080/api/appUser
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6ImFwcGFkbWluIiwiYXBwVXNlcklkIjoyLCJhdXRob3JpdGllcyI6WyJVU0VSIl0sImV4cCI6MTY4MDI3OTYyNX0.nXHPALS9ev8oN7fp9e2WPq0aic-mnvhYPSuNq7wM8qc
+
+// findAll
+GET {{base-url}} HTTP/1.1
+
+###
+
+// valid findById
+GET {{base-url}}/2 HTTP/1.1
+
+###
+
+POST http://localhost:8080/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "appuser",
+    "password": "user"
+}
+
+###
+
+POST http://localhost:8080/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "appadmin",
+    "password": "admin"
+}
+
+###
+//create user happy path
+POST {{base-url}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "username": "new",
+    "password": "user",
+    "enabled": true,
+    "firstName": "Testfirst",
+    "lastName": "TestLast",
+    "email": "test@user.com",
+    "dob": "1998-01-01",
+    "roles": []
+}
+
+###
+//create user sad path
+POST {{base-url}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "username": "new",
+    "password": "",
+    "enabled": true,
+    "firstName": "Testfirst",
+    "lastName": "TestLast",
+    "email": "test@user.com",
+    "dob": "1998-01-01",
+    "roles": []
+}
+###
+//Test update user
+PUT {{base-url}}/2 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "appUserId": 2,
+  "username": "appadmin",
+  "password": "$2a$10$M7zdZA/n26txoefFMQF8ZeNXuarS2IwqxnbXHdD1n.CgeTpoyunpe",
+  "enabled": true,
+  "firstName": "testChange2",
+  "lastName": "adminlast",
+  "email": "admin@admin.com",
+  "dob": "2000-01-01",
+  "roles": [
+    {
+      "appRoleId": 2,
+      "roleName": "USER",
+      "authority": "USER"
+    }
+  ]
+}
+###
+//Delete User
+DELETE {{base-url}}/1 HTTP/1.1
+Authorization: Bearer {{jwt}}

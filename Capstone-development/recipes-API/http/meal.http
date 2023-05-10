@@ -1,0 +1,79 @@
+@base-url = http://localhost:8080/api/meal
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6InBtIiwiYXBwVXNlcklkIjozLCJhdXRob3JpdGllcyI6WyJVU0VSIiwiQURNSU4iXSwiZXhwIjoxNjgwNjQ3MDk1fQ.3A2fD3m39OFOMXcQFpL4-qMaKwt2wUP48IRDdj68x6Y
+###
+
+POST http://localhost:8080/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "appuser",
+    "password": "user"
+}
+
+###
+
+POST http://localhost:8080/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "appadmin",
+    "password": "admin"
+}
+
+###
+// findAll
+GET {{base-url}} HTTP/1.1
+
+###
+//find good id
+
+GET {{base-url}}/5 HTTP/1.1
+Authorization: Bearer {{jwt}}
+###
+
+//find bad id
+
+GET {{base-url}}/99 HTTP/1.1
+Authorization: Bearer {{jwt}}
+###
+//Good Post
+POST {{base-url}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "app_user_id": 1,
+  "date": "2023-04-01",
+  "time": "18:00:00",
+  "mealCategory": "dinner",
+  "recipes": []
+}
+###
+//Update Good
+PUT {{base-url}}/5 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "mealId": 5,
+  "time": "18:00:00",
+  "mealCategory": "Snack",
+  "recipes": [],
+  "food": []
+}
+###
+//Update Bad
+PUT {{base-url}}/99 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "mealId": 5,
+  "time": "18:00:00",
+  "mealCategory": "",
+  "recipes": [],
+  "food": []
+}
+###
+DELETE {{base-url}}/5 HTTP/1.1
+Authorization: Bearer {{jwt}}

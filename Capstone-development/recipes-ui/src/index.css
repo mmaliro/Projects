@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* .navbar-nav {
+    display: flex;
+    align-items: center;
+  } */
+
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-nav li {
+    margin: 0 10px;
+}
+
+.ff_about_page {
+    position: relative;
+}
+
+.ff_about_page img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+body.bg {
+    background-image: url(./images/login_page.jpg);
+    background-image: url(./images/ff_about_page.jpg);  
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+/* html, body {
+    height: 100%;
+  }
+  
+body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+main {
+    flex: 1;
+    min-height: calc(100vh - 100px); 
+  }
+  
+footer {
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+   */
+
+
+  
+  
+  

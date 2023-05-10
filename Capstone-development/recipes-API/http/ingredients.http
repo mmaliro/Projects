@@ -1,0 +1,27 @@
+@base-url = http://localhost:8080/api/ingredients
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6InBtIiwiYXBwVXNlcklkIjozLCJhdXRob3JpdGllcyI6WyJVU0VSIiwiQURNSU4iXSwiZXhwIjoxNjgwNjY0MjUxfQ.g4ru499orM4NXE6g4lXr3ptaY4d37NcE638n_vZnlkk
+###
+
+POST http://localhost:8080/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "pm",
+    "password": "paul"
+}
+
+###
+
+POST {{base-url}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "recipeId": 3,
+  "food": {
+      "foodId": 55,
+      "foodName": "rice wine vinegar"
+      },
+  "amount": 2,
+  "measurementUnit": "tbsp"
+}

@@ -1,0 +1,75 @@
+@base-url = http://localhost:8080/api/food
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6ImFwcGFkbWluIiwiYXBwVXNlcklkIjoyLCJhdXRob3JpdGllcyI6WyJBRE1JTiJdLCJleHAiOjE2ODAyODgyMzJ9.Dq_OH0s7ryrX-p84k0Xf69NBy_nIrk8hXSvhoZ6mr4U
+###
+
+POST http://localhost:8080/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "appuser",
+    "password": "user"
+}
+
+###
+
+POST http://localhost:8080/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "appadmin",
+    "password": "admin"
+}
+
+###
+// findAll
+GET {{base-url}} HTTP/1.1
+
+###
+//find good id
+
+GET {{base-url}}/1 HTTP/1.1
+Authorization: Bearer {{jwt}}
+###
+
+//find bad id
+
+GET {{base-url}}/99 HTTP/1.1
+Authorization: Bearer {{jwt}}
+###
+
+POST {{base-url}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "foodName": "Red Snapper",
+  "foodCategory": "fish",
+  "foodDescription": "red_snapper_description"
+}
+###
+//Update Good
+PUT {{base-url}}/14 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "foodId": 14,
+  "foodName": "Test Red Snapper",
+  "foodCategory": "fish",
+  "foodDescription": "red_snapper_description"
+}
+###
+//Update Bad
+PUT {{base-url}}/99 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "foodId": 14,
+  "foodName": "Salmon",
+  "foodCategory": "fish",
+  "foodDescription": "red_snapper_description"
+}
+###
+DELETE {{base-url}}/14 HTTP/1.1
+Authorization: Bearer {{jwt}}
